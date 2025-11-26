@@ -83,105 +83,118 @@ export default function WorkPage() {
             transition={{ duration: 0.5 }}
             className="grid md:grid-cols-2 gap-8 lg:gap-12"
           >
-            {filteredStudies.map((study, index) => (
-              <motion.div
-                key={study.id}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-                className={
-                  index === 0 ? "md:col-span-2" : ""
-                }
-              >
-                <Link
-                  to={`/work/${study.id}`}
-                  className="block group"
+            {filteredStudies.map(
+              ({
+                study,
+                index,
+              }: {
+                study: (typeof filteredStudies)[0];
+                index: number;
+              }) => (
+                <motion.div
+                  key={study.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.1,
+                  }}
+                  className={
+                    index === 0 ? "md:col-span-2" : ""
+                  }
                 >
-                  <Card className="rounded-none border-0 bg-transparent overflow-hidden">
-                    <CardContent className="p-0">
-                      {/* Image */}
-                      <div
-                        className={`relative overflow-hidden ${
-                          index === 0
-                            ? "aspect-21/9"
-                            : "aspect-4/3"
-                        }`}
-                      >
-                        <motion.div
-                          className={`absolute inset-0 bg-linear-to-br ${study.heroImage}`}
-                          whileHover={{ scale: 1.05 }}
-                          transition={{
-                            duration: 0.6,
-                            ease: "easeOut",
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-all duration-500" />
+                  <Link
+                    to={`/work/${study.id}`}
+                    className="block group"
+                  >
+                    <Card className="rounded-none border-0 bg-transparent overflow-hidden">
+                      <CardContent className="p-0">
+                        {/* Image */}
+                        <div
+                          className={`relative overflow-hidden ${
+                            index === 0
+                              ? "aspect-21/9"
+                              : "aspect-4/3"
+                          }`}
+                        >
+                          <motion.div
+                            className={`absolute inset-0 bg-linear-to-br ${study.heroImage}`}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{
+                              duration: 0.6,
+                              ease: "easeOut",
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/60 transition-all duration-500" />
 
-                        {/* Category Badge */}
-                        <div className="absolute top-6 left-6 z-10">
-                          <span className="bg-background/90 backdrop-blur-sm text-foreground text-xs tracking-widest px-4 py-2">
-                            {study.category.toUpperCase()}
-                          </span>
-                        </div>
+                          {/* Category Badge */}
+                          <div className="absolute top-6 left-6 z-10">
+                            <span className="bg-background/90 backdrop-blur-sm text-foreground text-xs tracking-widest px-4 py-2">
+                              {study.category.toUpperCase()}
+                            </span>
+                          </div>
 
-                        {/* Year Badge */}
-                        <div className="absolute top-6 right-6 z-10">
-                          <span className="text-background/80 text-sm">
-                            {study.year}
-                          </span>
-                        </div>
+                          {/* Year Badge */}
+                          <div className="absolute top-6 right-6 z-10">
+                            <span className="text-background/80 text-sm">
+                              {study.year}
+                            </span>
+                          </div>
 
-                        {/* Hover Content */}
-                        <div className="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-500">
-                          <p className="text-background text-lg font-light leading-relaxed mb-4 max-w-xl">
-                            {study.shortDescription}
-                          </p>
-                          <div className="flex items-center gap-4">
-                            {study.results
-                              .slice(0, 2)
-                              .map((result) => (
-                                <div
-                                  key={result.label}
-                                  className="text-background/80"
-                                >
-                                  <span className="text-accent text-lg font-light">
-                                    {result.metric}
-                                  </span>
-                                  <span className="text-xs ml-2">
-                                    {result.label}
-                                  </span>
-                                </div>
-                              ))}
+                          {/* Hover Content */}
+                          <div className="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            <p className="text-background text-lg font-light leading-relaxed mb-4 max-w-xl">
+                              {study.shortDescription}
+                            </p>
+                            <div className="flex items-center gap-4">
+                              {study.results
+                                .slice(0, 2)
+                                .map(
+                                  (result: {
+                                    label: string;
+                                    metric: string;
+                                  }) => (
+                                    <div
+                                      key={result.label}
+                                      className="text-background/80"
+                                    >
+                                      <span className="text-accent text-lg font-light">
+                                        {result.metric}
+                                      </span>
+                                      <span className="text-xs ml-2">
+                                        {result.label}
+                                      </span>
+                                    </div>
+                                  )
+                                )}
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Content */}
-                      <div className="pt-6 flex items-start justify-between px-8">
-                        <div>
-                          <h2
-                            className={`font-light text-foreground group-hover:text-accent transition-colors ${
-                              index === 0
-                                ? "text-3xl md:text-4xl"
-                                : "text-2xl"
-                            }`}
-                          >
-                            {study.title}
-                          </h2>
-                          <p className="text-muted-foreground text-sm mt-2">
-                            {study.client}
-                          </p>
+                        {/* Content */}
+                        <div className="pt-6 flex items-start justify-between px-8">
+                          <div>
+                            <h2
+                              className={`font-light text-foreground group-hover:text-accent transition-colors ${
+                                index === 0
+                                  ? "text-3xl md:text-4xl"
+                                  : "text-2xl"
+                              }`}
+                            >
+                              {study.title}
+                            </h2>
+                            <p className="text-muted-foreground text-sm mt-2">
+                              {study.client}
+                            </p>
+                          </div>
+                          <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                         </div>
-                        <ArrowUpRight className="w-6 h-6 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              </motion.div>
-            ))}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              )
+            )}
           </motion.div>
         </AnimatePresence>
       </SectionContainer>

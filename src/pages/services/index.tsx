@@ -49,74 +49,89 @@ export default function ServicesPage() {
       {/* Services Grid */}
       <SectionContainer className="-mt-16 relative z-10">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          {services.map((service, index) => {
-            const Icon = iconMap[service.icon];
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                }}
-              >
-                <Link
-                  to={`/services/${service.id}`}
-                  className="block group"
+          {services.map(
+            ({
+              service,
+              index,
+            }: {
+              service: {
+                id: string;
+                title: string;
+                shortDescription: string;
+                icon: string;
+                features: string[];
+                duration: string;
+              };
+              index: number;
+            }) => {
+              const Icon = iconMap[service.icon];
+              return (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.1,
+                  }}
                 >
-                  <div className="bg-background border border-border p-8 md:p-10 hover:border-accent/50 hover:shadow-lg transition-all duration-500 h-full">
-                    {/* Icon */}
-                    <div className="mb-6">
-                      {Icon && (
-                        <div className="w-14 h-14 border border-accent/30 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all duration-300">
-                          <Icon
-                            className="w-6 h-6 text-accent"
-                            strokeWidth={1}
-                          />
-                        </div>
-                      )}
+                  <Link
+                    to={`/services/${service.id}`}
+                    className="block group"
+                  >
+                    <div className="bg-background border border-border p-8 md:p-10 hover:border-accent/50 hover:shadow-lg transition-all duration-500 h-full">
+                      {/* Icon */}
+                      <div className="mb-6">
+                        {Icon && (
+                          <div className="w-14 h-14 border border-accent/30 flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all duration-300">
+                            <Icon
+                              className="w-6 h-6 text-accent"
+                              strokeWidth={1}
+                            />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Content */}
+                      <h2 className="text-2xl md:text-3xl font-light text-foreground group-hover:text-accent transition-colors mb-4">
+                        {service.title}
+                      </h2>
+
+                      <p className="text-muted-foreground font-light leading-relaxed mb-6">
+                        {service.shortDescription}
+                      </p>
+
+                      {/* Features */}
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {service.features
+                          .slice(0, 4)
+                          .map((feature) => (
+                            <span
+                              key={feature}
+                              className="text-xs tracking-widest text-muted-foreground border border-border px-3 py-1.5 bg-secondary/50"
+                            >
+                              {feature}
+                            </span>
+                          ))}
+                      </div>
+
+                      {/* CTA */}
+                      <div className="flex items-center justify-between pt-6 border-t border-border">
+                        <span className="text-sm text-accent tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
+                          LEARN MORE
+                          <ArrowRight className="w-4 h-4" />
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {service.duration}
+                        </span>
+                      </div>
                     </div>
-
-                    {/* Content */}
-                    <h2 className="text-2xl md:text-3xl font-light text-foreground group-hover:text-accent transition-colors mb-4">
-                      {service.title}
-                    </h2>
-
-                    <p className="text-muted-foreground font-light leading-relaxed mb-6">
-                      {service.shortDescription}
-                    </p>
-
-                    {/* Features */}
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {service.features
-                        .slice(0, 4)
-                        .map((feature) => (
-                          <span
-                            key={feature}
-                            className="text-xs tracking-widest text-muted-foreground border border-border px-3 py-1.5 bg-secondary/50"
-                          >
-                            {feature}
-                          </span>
-                        ))}
-                    </div>
-
-                    {/* CTA */}
-                    <div className="flex items-center justify-between pt-6 border-t border-border">
-                      <span className="text-sm text-accent tracking-widest flex items-center gap-2 group-hover:gap-3 transition-all">
-                        LEARN MORE
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {service.duration}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
+                  </Link>
+                </motion.div>
+              );
+            }
+          )}
         </div>
       </SectionContainer>
 

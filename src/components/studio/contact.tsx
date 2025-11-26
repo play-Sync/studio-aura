@@ -169,7 +169,9 @@ export function Contact() {
                 <Input
                   required
                   value={formState.name}
-                  onChange={(e) =>
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement>
+                  ) =>
                     setFormState({
                       ...formState,
                       name: e.target.value,
@@ -187,7 +189,9 @@ export function Contact() {
                   required
                   type="email"
                   value={formState.email}
-                  onChange={(e) =>
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement>
+                  ) =>
                     setFormState({
                       ...formState,
                       email: e.target.value,
@@ -206,7 +210,9 @@ export function Contact() {
                 </label>
                 <Input
                   value={formState.company}
-                  onChange={(e) =>
+                  onChange={(
+                    e: React.ChangeEvent<HTMLInputElement>
+                  ) =>
                     setFormState({
                       ...formState,
                       company: e.target.value,
@@ -257,7 +263,9 @@ export function Contact() {
               <Textarea
                 required
                 value={formState.message}
-                onChange={(e) =>
+                onChange={(
+                  e: React.ChangeEvent<HTMLTextAreaElement>
+                ) =>
                   setFormState({
                     ...formState,
                     message: e.target.value,

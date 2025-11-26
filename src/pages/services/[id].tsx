@@ -39,7 +39,7 @@ export default function ServiceDetailPage() {
     service.id
   );
   const currentIndex = services.findIndex(
-    (s) => s.id === service.id
+    (s: { id: string }) => s.id === service.id
   );
   const nextService =
     services[(currentIndex + 1) % services.length];
@@ -97,7 +97,7 @@ export default function ServiceDetailPage() {
           </div>
 
           <StaggerContainer className="grid grid-cols-2 gap-6">
-            {service.features.map((feature) => (
+            {service.features.map((feature: string) => (
               <motion.div
                 key={feature}
                 variants={fadeInUp}
@@ -132,37 +132,45 @@ export default function ServiceDetailPage() {
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {service.process.map((step, index) => (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.15,
-              }}
-              className="relative"
-            >
-              {/* Step Number */}
-              <div className="text-accent text-sm tracking-widest mb-4">
-                STEP {String(index + 1).padStart(2, "0")}
-              </div>
+          {service.process.map(
+            ({
+              step,
+              index,
+            }: {
+              step: { title: string; description: string };
+              index: number;
+            }) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                }}
+                className="relative"
+              >
+                {/* Step Number */}
+                <div className="text-accent text-sm tracking-widest mb-4">
+                  STEP {String(index + 1).padStart(2, "0")}
+                </div>
 
-              {/* Content */}
-              <h3 className="text-xl font-light text-foreground mb-3">
-                {step.title}
-              </h3>
-              <p className="text-muted-foreground text-sm font-light leading-relaxed">
-                {step.description}
-              </p>
+                {/* Content */}
+                <h3 className="text-xl font-light text-foreground mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground text-sm font-light leading-relaxed">
+                  {step.description}
+                </p>
 
-              {/* Connector Line */}
-              {index < service.process.length - 1 && (
-                <div className="hidden lg:block absolute top-8 -right-4 w-8 h-px bg-accent/30" />
-              )}
-            </motion.div>
-          ))}
+                {/* Connector Line */}
+                {index < service.process.length - 1 && (
+                  <div className="hidden lg:block absolute top-8 -right-4 w-8 h-px bg-accent/30" />
+                )}
+              </motion.div>
+            )
+          )}
         </div>
       </SectionContainer>
 
@@ -194,22 +202,30 @@ export default function ServiceDetailPage() {
           </div>
 
           <StaggerContainer className="space-y-6">
-            {service.benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit}
-                variants={fadeInUp}
-                className="flex items-start gap-4 p-6 border border-background/10 hover:border-accent/30 transition-colors"
-              >
-                <div className="w-8 h-8 border border-accent flex items-center justify-center shrink-0">
-                  <span className="text-accent text-sm">
-                    {index + 1}
-                  </span>
-                </div>
-                <p className="text-background/80 font-light text-lg">
-                  {benefit}
-                </p>
-              </motion.div>
-            ))}
+            {service.benefits.map(
+              ({
+                benefit,
+                index,
+              }: {
+                benefit: string;
+                index: number;
+              }) => (
+                <motion.div
+                  key={benefit}
+                  variants={fadeInUp}
+                  className="flex items-start gap-4 p-6 border border-background/10 hover:border-accent/30 transition-colors"
+                >
+                  <div className="w-8 h-8 border border-accent flex items-center justify-center shrink-0">
+                    <span className="text-accent text-sm">
+                      {index + 1}
+                    </span>
+                  </div>
+                  <p className="text-background/80 font-light text-lg">
+                    {benefit}
+                  </p>
+                </motion.div>
+              )
+            )}
           </StaggerContainer>
         </div>
       </SectionContainer>
@@ -219,14 +235,22 @@ export default function ServiceDetailPage() {
         <RelatedItems
           label="RELATED WORK"
           title="See it in action"
-          items={relatedCaseStudies.map((study) => ({
-            id: study.id,
-            title: study.title,
-            description: study.shortDescription,
-            category: study.category,
-            gradient: study.heroImage,
-            href: `/work/${study.id}`,
-          }))}
+          items={relatedCaseStudies.map(
+            (study: {
+              id: string;
+              title: string;
+              shortDescription: string;
+              category: string;
+              heroImage: string;
+            }) => ({
+              id: study.id,
+              title: study.title,
+              description: study.shortDescription,
+              category: study.category,
+              gradient: study.heroImage,
+              href: `/work/${study.id}`,
+            })
+          )}
         />
       )}
 

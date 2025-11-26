@@ -64,7 +64,8 @@ export function CaseStudies() {
     activeTab === "all"
       ? caseStudies
       : caseStudies.filter(
-          (study) => study.category === activeTab
+          (study: (typeof caseStudies)[0]) =>
+            study.category === activeTab
         );
 
   return (
@@ -109,13 +110,21 @@ export function CaseStudies() {
           transition={{ duration: 0.5 }}
           className="grid md:grid-cols-2 gap-8"
         >
-          {filteredStudies.map((study, index) => (
-            <CaseStudyCard
-              key={study.id}
-              study={study}
-              index={index}
-            />
-          ))}
+          {filteredStudies.map(
+            ({
+              study,
+              index,
+            }: {
+              study: (typeof caseStudies)[0];
+              index: number;
+            }) => (
+              <CaseStudyCard
+                key={study.id}
+                study={study}
+                index={index}
+              />
+            )
+          )}
         </motion.div>
       </AnimatePresence>
 

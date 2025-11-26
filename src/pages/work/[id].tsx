@@ -65,26 +65,34 @@ export default function CaseStudyDetailPage() {
         </motion.p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {caseStudy.results.map((result, index) => (
-            <motion.div
-              key={result.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.1,
-              }}
-              className="text-center"
-            >
-              <p className="text-4xl md:text-5xl lg:text-6xl font-extralight text-background">
-                {result.metric}
-              </p>
-              <p className="text-background/60 text-sm tracking-widest mt-2">
-                {result.label}
-              </p>
-            </motion.div>
-          ))}
+          {caseStudy.results.map(
+            ({
+              result,
+              index,
+            }: {
+              result: { label: string; metric: string };
+              index: number;
+            }) => (
+              <motion.div
+                key={result.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.1,
+                }}
+                className="text-center"
+              >
+                <p className="text-4xl md:text-5xl lg:text-6xl font-extralight text-background">
+                  {result.metric}
+                </p>
+                <p className="text-background/60 text-sm tracking-widest mt-2">
+                  {result.label}
+                </p>
+              </motion.div>
+            )
+          )}
         </div>
       </SectionContainer>
 
@@ -150,29 +158,37 @@ export default function CaseStudyDetailPage() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-4">
-          {caseStudy.services.map((serviceName, index) => (
-            <motion.div
-              key={serviceName}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.4,
-                delay: index * 0.1,
-              }}
-            >
-              <Link
-                to={`/services/${serviceName
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                className="block px-8 py-4 border border-border hover:border-accent hover:bg-accent/5 transition-all duration-300 group"
+          {caseStudy.services.map(
+            ({
+              serviceName,
+              index,
+            }: {
+              serviceName: string;
+              index: number;
+            }) => (
+              <motion.div
+                key={serviceName}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.1,
+                }}
               >
-                <span className="text-foreground group-hover:text-accent transition-colors tracking-widest text-sm">
-                  {serviceName}
-                </span>
-              </Link>
-            </motion.div>
-          ))}
+                <Link
+                  to={`/services/${serviceName
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                  className="block px-8 py-4 border border-border hover:border-accent hover:bg-accent/5 transition-all duration-300 group"
+                >
+                  <span className="text-foreground group-hover:text-accent transition-colors tracking-widest text-sm">
+                    {serviceName}
+                  </span>
+                </Link>
+              </motion.div>
+            )
+          )}
         </div>
       </SectionContainer>
 
@@ -186,30 +202,41 @@ export default function CaseStudyDetailPage() {
         />
 
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {caseStudy.gallery.map((item, index) => (
-            <motion.div
-              key={index}
-              variants={fadeInUp}
-              className={`relative overflow-hidden group cursor-pointer ${
-                index === 0 || index === 3 || index === 4
-                  ? "md:col-span-2 "
-                  : "aspect-square"
-              }`}
-            >
-              {/* aspect-21/10 */}
-              <div
-                className={`absolute inset-0 bg-linear-to-br ${item.gradient}`}
-              />
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
+          {caseStudy.gallery.map(
+            ({
+              item,
+              index,
+            }: {
+              item: {
+                gradient: string;
+                caption: string;
+              };
+              index: number;
+            }) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className={`relative overflow-hidden group cursor-pointer ${
+                  index === 0 || index === 3 || index === 4
+                    ? "md:col-span-2 "
+                    : "aspect-square"
+                }`}
+              >
+                {/* aspect-21/10 */}
+                <div
+                  className={`absolute inset-0 bg-linear-to-br ${item.gradient}`}
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-500" />
 
-              {/* Caption */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="text-background text-sm tracking-widest border border-background/30 px-6 py-3">
-                  {item.caption}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                {/* Caption */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="text-background text-sm tracking-widest border border-background/30 px-6 py-3">
+                    {item.caption}
+                  </span>
+                </div>
+              </motion.div>
+            )
+          )}
         </StaggerContainer>
       </SectionContainer>
 
