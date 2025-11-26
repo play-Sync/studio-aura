@@ -4,12 +4,12 @@ import { Routes, Route } from "react-router-dom";
 
 import AboutPage from "@/pages/about";
 import ServicesPage from "@/pages/services/index";
-import ServiceDetailPage from "@/pages/services/[id]";
 import WorkPage from "@/pages/work/index";
-import CaseStudyDetailPage from "@/pages/work/[id]";
+import CaseStudyDetailPage from "@/pages/work/[id]/CaseStudyDetailPage";
 import ContactPage from "@/pages/contact";
 import HomePage from "./pages";
 import ScrollToTop from "./components/scroll-to-top";
+import ServiceDetailPage from "./pages/services/[id]/ServiceDetailPage";
 
 function App() {
   return (

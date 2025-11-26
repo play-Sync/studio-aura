@@ -29,7 +29,7 @@ import {
 
 export default function ServiceDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const service = getServiceById(id || "");
+  const service = getServiceById(id);
 
   if (!service) {
     return <Navigate to="/services" replace />;

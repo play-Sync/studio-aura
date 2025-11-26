@@ -28,8 +28,7 @@ import { getCaseStudyById } from "@/data/data";
 
 export default function CaseStudyDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const caseStudy = getCaseStudyById(id || "");
-
+  const caseStudy = getCaseStudyById(id);
   if (!caseStudy) {
     return <Navigate to="/work" replace />;
   }
@@ -66,13 +65,10 @@ export default function CaseStudyDetailPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {caseStudy.results.map(
-            ({
-              result,
-              index,
-            }: {
-              result: { label: string; metric: string };
-              index: number;
-            }) => (
+            (
+              result: { label: string; metric: string },
+              index: number
+            ) => (
               <motion.div
                 key={result.label}
                 initial={{ opacity: 0, y: 20 }}
@@ -85,10 +81,10 @@ export default function CaseStudyDetailPage() {
                 className="text-center"
               >
                 <p className="text-4xl md:text-5xl lg:text-6xl font-extralight text-background">
-                  {result.metric}
+                  {result?.metric}
                 </p>
                 <p className="text-background/60 text-sm tracking-widest mt-2">
-                  {result.label}
+                  {result?.label}
                 </p>
               </motion.div>
             )
@@ -177,9 +173,7 @@ export default function CaseStudyDetailPage() {
                 }}
               >
                 <Link
-                  to={`/services/${serviceName
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`}
+                  to={`/services/${serviceName}`}
                   className="block px-8 py-4 border border-border hover:border-accent hover:bg-accent/5 transition-all duration-300 group"
                 >
                   <span className="text-foreground group-hover:text-accent transition-colors tracking-widest text-sm">
@@ -203,16 +197,13 @@ export default function CaseStudyDetailPage() {
 
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {caseStudy.gallery.map(
-            ({
-              item,
-              index,
-            }: {
+            (
               item: {
                 gradient: string;
                 caption: string;
-              };
-              index: number;
-            }) => (
+              },
+              index: number
+            ) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}

@@ -1,5 +1,8 @@
+// src/components/studio/case-studies.tsx
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   Tabs,
   TabsList,
@@ -10,52 +13,50 @@ import { SectionContainer } from "./layout";
 import { SectionTitle } from "./typography";
 import { AnimatedDiv } from "./animations";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { caseStudies } from "@/data/data";
-import { Link } from "react-router-dom";
 
-// const caseStudies = [
-//   {
-//     id: 1,
-//     title: "Meridian Wellness",
-//     category: "branding",
-//     description:
-//       "Complete brand identity for a luxury wellness retreat",
-//     year: "2024",
-//     gradient:
-//       "from-violet-500 via-purple-500 to-fuchsia-500",
-//     results: "+180% Brand Recognition",
-//   },
-//   {
-//     id: 2,
-//     title: "Finch & Sparrow",
-//     category: "web",
-//     description:
-//       "E-commerce experience for artisanal homeware brand",
-//     year: "2024",
-//     gradient: "from-rose-400 via-pink-500 to-red-500",
-//     results: "+250% Online Sales",
-//   },
-//   {
-//     id: 3,
-//     title: "Atlas Ventures",
-//     category: "strategy",
-//     description:
-//       "Strategic repositioning for venture capital firm",
-//     year: "2023",
-//     gradient: "from-cyan-400 via-blue-500 to-indigo-500",
-//     results: "12 New Partnerships",
-//   },
-//   {
-//     id: 4,
-//     title: "Ember Studio",
-//     category: "branding",
-//     description:
-//       "Visual identity for contemporary ceramics studio",
-//     year: "2023",
-//     gradient: "from-emerald-400 via-teal-500 to-cyan-500",
-//     results: "+95% Social Growth",
-//   },
-// ];
+const caseStudies = [
+  {
+    id: "meridian-wellness",
+    title: "Meridian Wellness",
+    category: "branding",
+    description:
+      "Complete brand identity for a luxury wellness retreat",
+    year: "2024",
+    gradient:
+      "from-violet-500 via-purple-500 to-fuchsia-500",
+    results: "+180% Brand Recognition",
+  },
+  {
+    id: "finch-sparrow",
+    title: "Finch & Sparrow",
+    category: "web",
+    description:
+      "E-commerce experience for artisanal homeware brand",
+    year: "2024",
+    gradient: "from-rose-400 via-pink-500 to-red-500",
+    results: "+250% Online Sales",
+  },
+  {
+    id: "atlas-ventures",
+    title: "Atlas Ventures",
+    category: "strategy",
+    description:
+      "Strategic repositioning for venture capital firm",
+    year: "2023",
+    gradient: "from-cyan-400 via-blue-500 to-indigo-500",
+    results: "12 New Partnerships",
+  },
+  {
+    id: "ember-studio",
+    title: "Ember Studio",
+    category: "branding",
+    description:
+      "Visual identity for contemporary ceramics studio",
+    year: "2023",
+    gradient: "from-emerald-400 via-teal-500 to-cyan-500",
+    results: "+95% Social Growth",
+  },
+];
 
 export function CaseStudies() {
   const [activeTab, setActiveTab] = useState("all");
@@ -64,8 +65,7 @@ export function CaseStudies() {
     activeTab === "all"
       ? caseStudies
       : caseStudies.filter(
-          (study: (typeof caseStudies)[0]) =>
-            study.category === activeTab
+          (study) => study.category === activeTab
         );
 
   return (
@@ -110,21 +110,13 @@ export function CaseStudies() {
           transition={{ duration: 0.5 }}
           className="grid md:grid-cols-2 gap-8"
         >
-          {filteredStudies.map(
-            ({
-              study,
-              index,
-            }: {
-              study: (typeof caseStudies)[0];
-              index: number;
-            }) => (
-              <CaseStudyCard
-                key={study.id}
-                study={study}
-                index={index}
-              />
-            )
-          )}
+          {filteredStudies.map((study, index) => (
+            <CaseStudyCard
+              key={study.id}
+              study={study}
+              index={index}
+            />
+          ))}
         </motion.div>
       </AnimatePresence>
 
@@ -136,10 +128,13 @@ export function CaseStudies() {
         transition={{ duration: 0.8, delay: 0.4 }}
         className="text-center mt-16"
       >
-        <button className="inline-flex items-center gap-3 text-foreground text-sm tracking-widest border border-foreground/20 px-8 py-4 hover:bg-foreground hover:text-background transition-all duration-500 group">
+        <Link
+          to="/work"
+          className="inline-flex items-center gap-3 text-foreground text-sm tracking-widest border border-foreground/20 px-8 py-4 hover:bg-foreground hover:text-background transition-all duration-500 group"
+        >
           VIEW ALL PROJECTS
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </button>
+        </Link>
       </motion.div>
     </SectionContainer>
   );
@@ -155,19 +150,22 @@ function CaseStudyCard({
   index,
 }: CaseStudyCardProps) {
   return (
-    <Link to={`/work/${study.id}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+    >
+      <Link
+        to={`/work/${study.id}`}
+        className="block group"
       >
-        <Card className="rounded-none border-0 bg-transparent overflow-hidden group cursor-pointer">
+        <Card className="rounded-none border border-border bg-background overflow-hidden hover:border-accent/50 hover:shadow-lg transition-all duration-500">
           <CardContent className="p-0">
             {/* Image Container */}
-            <div className="relative aspect-4/3 overflow-hidden bg-secondary">
+            <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
               {/* Gradient Background */}
               <motion.div
-                className={`absolute inset-0 bg-linear-to-br ${study.heroImage}`}
+                className={`absolute inset-0 bg-gradient-to-br ${study.gradient}`}
                 whileHover={{ scale: 1.05 }}
                 transition={{
                   duration: 0.6,
@@ -185,28 +183,32 @@ function CaseStudyCard({
                 </span>
               </div>
 
+              {/* Year Badge */}
+              <div className="absolute top-6 right-6 z-10">
+                <span className="text-white/80 text-sm font-light">
+                  {study.year}
+                </span>
+              </div>
+
               {/* Hover Content */}
               <div className="absolute inset-0 p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <p className="text-background text-lg font-light leading-relaxed mb-4">
-                  {study.shortDescription}
+                <p className="text-white text-lg font-light leading-relaxed mb-4">
+                  {study.description}
                 </p>
                 <div className="flex items-center justify-between">
                   <span className="text-accent text-sm tracking-widest">
-                    {study.results[0].metric}{" "}
-                    {study.results[0].label}
+                    {study.results}
                   </span>
-                  <Link to={`/work/${study.id}`}>
-                    <div className="flex items-center gap-2 text-background text-sm tracking-widest">
-                      VIEW PROJECT
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </Link>
+                  <div className="flex items-center gap-2 text-white text-sm tracking-widest">
+                    VIEW PROJECT
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Card Footer */}
-            <div className="pt-6 px-8 flex items-start justify-between">
+            <div className="p-6 flex items-start justify-between">
               <div>
                 <h3 className="text-2xl font-light text-foreground group-hover:text-accent transition-colors duration-300">
                   {study.title}
@@ -215,13 +217,13 @@ function CaseStudyCard({
                   {study.category.toUpperCase()}
                 </p>
               </div>
-              <p className="text-muted-foreground text-sm">
-                {study.year}
-              </p>
+              <div className="w-10 h-10 border border-border flex items-center justify-center group-hover:border-accent group-hover:bg-accent/5 transition-all duration-300">
+                <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors" />
+              </div>
             </div>
           </CardContent>
         </Card>
-      </motion.div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }

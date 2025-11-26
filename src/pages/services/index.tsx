@@ -50,10 +50,7 @@ export default function ServicesPage() {
       <SectionContainer className="-mt-16 relative z-10">
         <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
           {services.map(
-            ({
-              service,
-              index,
-            }: {
+            (
               service: {
                 id: string;
                 title: string;
@@ -61,9 +58,9 @@ export default function ServicesPage() {
                 icon: string;
                 features: string[];
                 duration: string;
-              };
-              index: number;
-            }) => {
+              },
+              index: number
+            ) => {
               const Icon = iconMap[service.icon];
               return (
                 <motion.div
