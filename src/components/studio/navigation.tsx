@@ -1,5 +1,3 @@
-// src/components/studio/navigation.tsx
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";

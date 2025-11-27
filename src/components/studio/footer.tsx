@@ -1,5 +1,3 @@
-// src/components/studio/footer.tsx (Updated with routing)
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";

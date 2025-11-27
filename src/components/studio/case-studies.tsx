@@ -1,5 +1,3 @@
-// src/components/studio/case-studies.tsx
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -162,10 +160,10 @@ function CaseStudyCard({
         <Card className="rounded-none border border-border bg-background overflow-hidden hover:border-accent/50 hover:shadow-lg transition-all duration-500">
           <CardContent className="p-0">
             {/* Image Container */}
-            <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+            <div className="relative aspect-4/3 overflow-hidden bg-secondary">
               {/* Gradient Background */}
               <motion.div
-                className={`absolute inset-0 bg-gradient-to-br ${study.gradient}`}
+                className={`absolute inset-0 bg-linear-to-br ${study.gradient}`}
                 whileHover={{ scale: 1.05 }}
                 transition={{
                   duration: 0.6,

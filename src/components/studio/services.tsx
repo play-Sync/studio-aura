@@ -1,5 +1,3 @@
-// src/components/studio/services.tsx
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { SectionContainer } from "./layout";

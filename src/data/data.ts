@@ -1,5 +1,3 @@
-// src/lib/data.ts
-
 // Services Data
 export const services = [
   {

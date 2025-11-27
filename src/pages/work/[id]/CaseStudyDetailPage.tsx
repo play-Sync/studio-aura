@@ -1,5 +1,3 @@
-// src/pages/work/[id].tsx
-
 import {
   useParams,
   Navigate,
@@ -155,13 +153,7 @@ export default function CaseStudyDetailPage() {
 
         <div className="flex flex-wrap justify-center gap-4">
           {caseStudy.services.map(
-            ({
-              serviceName,
-              index,
-            }: {
-              serviceName: string;
-              index: number;
-            }) => (
+            (serviceName: string, index: number) => (
               <motion.div
                 key={serviceName}
                 initial={{ opacity: 0, scale: 0.9 }}

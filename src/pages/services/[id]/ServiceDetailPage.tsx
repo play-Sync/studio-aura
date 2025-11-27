@@ -1,5 +1,3 @@
-// src/pages/services/[id].tsx
-
 import { useParams, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Navigation } from "@/components/studio/navigation";
@@ -200,13 +198,7 @@ export default function ServiceDetailPage() {
 
           <StaggerContainer className="space-y-6">
             {service.benefits.map(
-              ({
-                benefit,
-                index,
-              }: {
-                benefit: string;
-                index: number;
-              }) => (
+              (benefit: string, index: number) => (
                 <motion.div
                   key={benefit}
                   variants={fadeInUp}
