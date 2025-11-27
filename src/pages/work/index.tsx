@@ -84,13 +84,10 @@ export default function WorkPage() {
             className="grid md:grid-cols-2 gap-8 lg:gap-12"
           >
             {filteredStudies.map(
-              ({
-                study,
-                index,
-              }: {
-                study: (typeof filteredStudies)[0];
-                index: number;
-              }) => (
+              (
+                study: (typeof filteredStudies)[0],
+                index: number
+              ) => (
                 <motion.div
                   key={study.id}
                   initial={{ opacity: 0, y: 40 }}

@@ -133,13 +133,10 @@ export default function ServiceDetailPage() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {service.process.map(
-            ({
-              step,
-              index,
-            }: {
-              step: { title: string; description: string };
-              index: number;
-            }) => (
+            (
+              step: { title: string; description: string },
+              index: number
+            ) => (
               <motion.div
                 key={step.title}
                 initial={{ opacity: 0, y: 40 }}
